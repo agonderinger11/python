@@ -43,6 +43,7 @@ class Television:
             self.__volume = 0
         else: 
             self.__muted = False
+            self.__volume = self.__temp
     
     def channel_up(self) -> None:
         """
