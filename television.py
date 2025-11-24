@@ -13,8 +13,8 @@ class Television:
         """
         self.__status: bool = False
         self.__muted: bool = False
-        self.__volume: int = self.MIN_VOLUME
-        self.__channel: int = self.MIN_CHANNEL
+        self.__volume: int = Television.MIN_VOLUME
+        self.__channel: int = Television.MIN_CHANNEL
         
         self.__temp: int = 0
         
@@ -34,16 +34,14 @@ class Television:
         When unmuted, restores previous volume
         Does nothing if TV is off
         """
-        if self.__status == False:
-            return
-        
-        if self.__muted == False:
-            self.__muted = True
-            self.__temp = self.__volume
-            self.__volume = 0
-        else: 
-            self.__muted = False
-            self.__volume = self.__temp
+        if self.__status:
+            if self.__muted == False:
+                self.__muted = True
+                self.__temp = self.__volume
+                self.__volume = 0
+            else: 
+                self.__muted = False
+                self.__volume = self.__temp
     
     def channel_up(self) -> None:
         """
@@ -51,13 +49,11 @@ class Television:
         Goes to MIN_CHANNEL if at MAX_CHANNEL.
         Does nothing if TV is off
         """
-        if self.__status == False:
-            return
-        
-        if self.__channel == self.MAX_CHANNEL:
-            self.__channel = self.MIN_CHANNEL
-        else:
-            self.__channel += 1
+        if self.__status:
+            if self.__channel == Television.MAX_CHANNEL:
+                self.__channel = Television.MIN_CHANNEL
+            else:
+                self.__channel += 1
 
     def channel_down(self) -> None:
         """
@@ -65,13 +61,11 @@ class Television:
         Goes to MIN_CHANNEL if at MAX_CHANNEL.
         Does nothing if TV is off
         """
-        if self.__status == False:
-            return
-        
-        if self.__channel == self.MIN_CHANNEL:
-            self.__channel = self.MAX_CHANNEL
-        else:
-            self.__channel -= 1
+        if self.__status:
+            if self.__channel == Television.MIN_CHANNEL:
+                self.__channel = Television.MAX_CHANNEL
+            else:
+                self.__channel -= 1
     
     def volume_up(self) -> None:
         """
@@ -79,16 +73,14 @@ class Television:
         If muted, unmutes and goes back to previous volume before increasing.
         Does nothing if already at MAX_VOLUME or if TV is off.
         """
-        if self.__status == False :
-            return
-        elif self.__muted == True:
-            self.__muted = False
-            self.__volume = self.__temp
-        
-        if self.__volume == self.MAX_VOLUME:
-            self.__volume = self.MAX_VOLUME
-        else:
-            self.__volume += 1
+        if self.__status:
+            if self.__muted == True:
+                self.__muted = False
+                self.__volume = self.__temp
+            if self.__volume == Television.MAX_VOLUME:
+                self.__volume = Television.MAX_VOLUME
+            else:
+                self.__volume += 1
     
     def volume_down(self) -> None:
         """
@@ -96,16 +88,14 @@ class Television:
         If muted, unmutes and goes back to previous volume before decreasing.
         Does nothing if already at MIN_VOLUME or if TV is off.
         """
-        if self.__status == False:
-            return
-        elif self.__muted == True:
-            self.__muted = False
-            self.__volume = self.__temp
-        
-        if self.__volume == self.MIN_VOLUME:
-            self.__volume = self.MIN_VOLUME
-        else:
-            self.__volume -= 1
+        if self.__status:
+            if self.__muted == True:
+                self.__muted = False
+                self.__volume = self.__temp
+            if self.__volume == Television.MIN_VOLUME:
+                self.__volume = Television.MIN_VOLUME
+            else:
+                self.__volume -= 1
     
     def __str__(self) -> str:
         """
